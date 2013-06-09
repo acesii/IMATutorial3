@@ -17,6 +17,8 @@
  * under the License.
  */
 var app = {
+    // Nurse Data as global data structure
+    nurse_data : [],
     // Application Constructor
     initialize: function() {
         this.bindEvents();
@@ -45,5 +47,27 @@ var app = {
         receivedElement.setAttribute('style', 'display:block;');
 
         console.log('Received Event: ' + id);
+    },
+    updateNurseList: function() {
+      $.getJSON ("http://localhost/~ibbo/listNurses.json",
+        function (data) {
+          // Store the data we have loaded for later use.
+          app.nurse_data=data
+          for (index = 0; index < data.length; ++index) {
+            // Maybe you could sub-navigate the specialisms list here and add a "tag" for each
+            // specialism
+            $("#NurseList").append ("<li onClick=\"javascript:app.showNurseDetails('"+data[index].id+"');\">"+
+                                        "<h3>"+
+                                        data[index].forename+", "+data[index].surname+
+                                        "</h3><p>Grade"+data[index].grade+
+                                        "</p></li>");
+          }
+          $("#NurseList").listview ("refresh");
+        }
+      );
+    },
+    showNurseDetails: function(nurse_id) {
+      alert("Show nurse details "+nurse_id);
+      $.mobile.changePage($("#NurseDetails"));
     }
 };
