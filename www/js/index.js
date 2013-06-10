@@ -49,7 +49,7 @@ var app = {
         console.log('Received Event: ' + id);
     },
     updateNurseList: function() {
-      $.getJSON ("http://localhost/~student/listNurses.json",
+      $.getJSON ("http://ianibbo.me/listNurses.json",
         function (data) {
           // Store the data we have loaded for later use.
           app.nurse_data=data
