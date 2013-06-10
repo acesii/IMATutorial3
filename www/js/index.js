@@ -69,6 +69,7 @@ var app = {
     showNurseDetails: function(nurse_id) {
       // We need to find the right entry in the nurse list, so iterate over
       // the nurse list until we find the provided ID, if we find a match set
+
       // nurse_to_show
       var nurse_to_show;
       for (index = 0; index < app.nurse_data.length; ++index) {
@@ -83,7 +84,8 @@ var app = {
       else {
         alert("Nurse "+nurse_id+" not found");
       }
-      $.mobile.changePage($("#NurseDetails"),{transition:"flip"});
+      $.mobile.changePage($("#NurseDetails"),{allowSamePageTransition:true,
+                                              transition:"flip"});
     }
 
 };
